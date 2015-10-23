@@ -1,0 +1,18 @@
+[ 2015-10-24T00:08:26+08:00 ] 127.0.0.1 /qrcode/?m=index&a=createPlan
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000646s ]
+ERR: 无法加载模块:Index
+
+[ 2015-10-24T00:08:37+08:00 ] 127.0.0.1 /qrcode/?m=index&a=createPlan
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000277s ]
+ERR: 无法加载模块:Index
+
+[ 2015-10-24T01:28:20+08:00 ] 127.0.0.1 /qrcode/?m=user&a=%08auth
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000017s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000439s ]
+ERR: 无法加载模块:User
+

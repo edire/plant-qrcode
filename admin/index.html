@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <div role="navigation" id="foo" class="nav-collapse">
+      <ul>
+        <li class="active"><a href="#">植物</a></li>
+        <li><a href="#">课程</a></li>
+        <li><a href="#">xxx</a></li>
+        <li><a href="#">xxx</a></li>
+      </ul>
+    </div>
+    <div role="main" class="main">
+        <a href="#nav" class="nav-toggle">Menu</a>
+        <h1>植物<button class="btn btn-success pull-right" data-toggle="modal" data-target="#addModal">添加植物</button></h1>
+        <div class="">
+          
+          <div class="form-inline">
+            <div class="form-group">
+              <label >查找</label>
+              <input type="text" class="form-control js-search-input" placeholder="回车查找">
+              <button class="js-search-btn btn-success">查找</button>
+              <button class="js-return-btn btn-warning">返回</button>
+            </div>
+          </div>
+
+        </div>
+        <div class>
+            <ul class="info-list js-info-list">
+            </ul>
+            <nav>
+              <div class="pagination js-list-pager"></div>
+            </nav>
+        </div>
+    </div>
+
+
+<div class="modal fade" id="addModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">添加植物</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal js-new-plant-form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">名称</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="名称" name="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">别名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="别名" name="alias">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">科属</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="科属" name="genera">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">花果期</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="花果期" name="flowerfruit">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">分布</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="分布" name="distribution">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">外观</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="外观" name="look">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">叶</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="叶" name="leaf">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">花</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="花" name="flower">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">果</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="果" name="fruit">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">植物功效</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="植物功效" name="effect">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">食用价值</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="食用价值" name="eat">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">习性特征</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" name="feature"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary js-submit-new">保存</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="changeModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">修改</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal js-change-plant-form">
+          <div class="form-group">
+            <label class="col-sm-2 control-label">名称</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="名称" name="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">别名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="别名" name="alias">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">科属</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="科属" name="genera">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">花果期</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="花果期" name="flowerfruit">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">分布</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="分布" name="distribution">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">外观</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="外观" name="look">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">叶</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="叶" name="leaf">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">花</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="花" name="flower">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">果</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="果" name="fruit">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">植物功效</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="植物功效" name="effect">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">食用价值</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="食用价值" name="eat">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">习性特征</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" rows="3" name="feature"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary js-change-submit">保存</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="loginModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">登陆</h4>
+      </div>
+      <div class="modal-body">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="用户名" name="username">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" placeholder="密码" name="password">
+            </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary js-login-submit">登陆</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade bs-example-modal-sm" id="qrCodeModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <img src="" width="300" height="300" class="js-qrcode-img">
+      <p class="code-name-box js-code-name-box"></p>
+    </div>
+  </div>
+</div>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="../static/js/pagination.js"></script>
+    <script src="../static/js/config.js"></script>
+    <script src="../static/js/nav.js"></script>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>
