@@ -1,5 +1,23 @@
 (function () {
-    
+
+app.beforeLogin = false;
+$.ajax({
+        url: app.root + '/qrcode.php?m=home&c=admin&a=getOne',
+        type: 'get',
+        data: {
+            id: 1
+        },
+        dataType: 'json',
+        async: false,
+        success: function (data) {
+            if (data.code == -2) {
+                app.beforeLogin = true;
+                $('#loginModal').modal();
+            }
+        }
+});
+
+
 
 var navigation = responsiveNav("foo", {customToggle: ".nav-toggle"});
 
@@ -52,6 +70,11 @@ $('.js-submit-new').on('click', function () {
         }
     });
 })
+$('input[name="password"]').on('keydown', function (e) {
+    if (e.keyCode === 13) {
+        $('.js-login-submit').trigger('click');
+    }
+})
 $('.js-login-submit').on('click', function () {
     var username = $('input[name="username"]').val();
     var password = $('input[name="password"]').val();
@@ -67,6 +90,9 @@ $('.js-login-submit').on('click', function () {
         success: function (data) {
             if (data.code == 0) {
                 $('#loginModal').modal('hide');
+                if (app.beforeLogin) {
+                    location.reload();
+                }
             } else {
                 alert(data.msg);
             }
@@ -150,7 +176,7 @@ $('#addModal').on('show.bs.modal', function () {
 
 
 var listModel = {};
-listModel.pageSize = 4;
+listModel.pageSize = 20;
 
 initList();
 
