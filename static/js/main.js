@@ -2,24 +2,18 @@
 
 app.beforeLogin = false;
 $.ajax({
-        url: app.root + '/qrcode.php?m=home&c=admin&a=getOne',
+        url: app.root + '/qrcode.php?m=home&c=user&a=isLogin',
         type: 'get',
-        data: {
-            id: 1
-        },
         dataType: 'json',
         async: false,
         success: function (data) {
-            if (data.code == -2) {
+            if (data.code != 0) {
                 app.beforeLogin = true;
                 $('#loginModal').modal();
             }
         },
         error: function () {
-            if (data.code == -2) {
-                app.beforeLogin = true;
-                $('#loginModal').modal();
-            }
+            alert('出现错误，请联系管理员');
         }
 });
 
@@ -59,6 +53,7 @@ $('.js-submit-new').on('click', function () {
     var title = $('#addModal').find('input[name="name"]').val().trim();
     if (!title) {
         alert('请填写名称');
+        return;
     }
     $.ajax({
         url: app.root + '/qrcode.php?m=home&c=admin&a=createPlant',

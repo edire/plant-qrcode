@@ -24,6 +24,14 @@ class UserController extends Controller {
         session('userInfo', $userInfo);
         $this->returnAjax(null, '登陆成功', 0);
     }
+    public function isLogin()
+    {
+        if (!session('userInfo')){
+            $this->returnAjax(null, '没有登陆！', -1);
+        } else {
+            $this->returnAjax(null, '已登陆', 0);
+        }
+    }
     public function logout()
     {
         header("Access-Control-Allow-Origin: *");
