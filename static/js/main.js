@@ -14,6 +14,12 @@ $.ajax({
                 app.beforeLogin = true;
                 $('#loginModal').modal();
             }
+        },
+        error: function () {
+            if (data.code == -2) {
+                app.beforeLogin = true;
+                $('#loginModal').modal();
+            }
         }
 });
 
@@ -173,7 +179,46 @@ $('#addModal').on('show.bs.modal', function () {
     $('.js-new-plant-form').get(0).reset();
 })
 
+$(".js-upload-img").click(function(e) {
+    var btn = $(this);
+    e.preventDefault();
+        // 上传方法
+        $.upload({
+                // 上传地址
+                url: app.root + '/qrcode.php?m=home&c=admin&a=uploadImg',
+                // 文件域名字
+                fileName: 'file',
+                // 上传完成后, 返回json, text
+                dataType: 'json',
+                // 上传之前回调,return true表示可继续上传
+                onSend: function(data) {
 
+                    return true;
+                },
+                onSubmit: function (data) {
+                    var file = $(data.target).find('input').get(0).files[0];
+                    if (file.size > 10000000) {
+                        alert('请上传小于10M的图片');
+                        return false;
+                    }
+                    if (file.type.indexOf('image') == -1) {
+                        alert('请上传图片文件 jpg/gif/png');
+                        return false;
+                    }
+                },
+                // 上传之后回调
+                onComplate: function(data) {
+                    if (data && data.code == 0) {
+                        var name = data.data.name;
+                        btn.closest('.js-picarea').find('.img').attr('src', app.root + '/upload/' + name);
+                        btn.closest('.js-picarea').find('.js-img-input').val(name);
+                    } else {
+                        alert(data.msg);
+                        return;
+                    }
+                }
+        });
+});
 
 var listModel = {};
 listModel.pageSize = 20;
@@ -286,6 +331,9 @@ function setForm (data) {
     for (var x in data) {
         $('input[name="'+x+'"]').val(data[x]);
         $('textarea[name="'+x+'"]').text(data[x]);
+        if (x.indexOf('pic') > -1) {
+            $('.'+x).attr('src', app.root+ '/upload/' + data[x]);
+        }
     }
 }
 })();

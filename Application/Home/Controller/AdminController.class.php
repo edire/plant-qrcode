@@ -91,4 +91,48 @@ class AdminController extends Controller {
         }
         $this->returnAjax($result[0], '保存成功', 0);
     }
+    public function uploadImg ()
+    {
+        if ((($_FILES["file"]["type"] == "image/gif")
+        || ($_FILES["file"]["type"] == "image/jpeg")
+        || ($_FILES["file"]["type"] == "image/pjpeg")
+        || ($_FILES["file"]["type"] == "image/png"))
+        && ($_FILES["file"]["size"] < 10000000))
+          {
+            $name = time().rand();
+            switch ($_FILES["file"]["type"]) {
+                case 'image/gif':
+                    $fullName = $name.'.gif';
+                    break;
+                case 'image/jpeg':
+                    $fullName = $name.'.jpg';
+                    break;
+                case 'image/pjpeg':
+                    $fullName = $name.'.jpg';
+                    break;
+                case 'image/png':
+                    $fullName = $name.'.png';
+                    break;
+            }
+            $a = move_uploaded_file($_FILES["file"]["tmp_name"],
+                                UPLOAD_PATH . $fullName);
+            if ($a){
+                $result = array('name'=> $fullName);
+                $this->returnAjax($result, '保存成功', 0);
+            } else {
+                $this->returnAjax(null, '文件保存失败', -1);
+            }
+          } else {
+            $this->returnAjax(null, '文件格式 gif/jpg/png 小于10M', -1);
+          }
+
+        if(!$info) {// 上传错误提示错误信息
+            $this->error($upload->getError());
+        }else{// 上传成功
+            var_dump($info);
+            $this->success('上传成功！');
+        }
+        $this->returnAjax(null, '保存成功', 0);
+        
+    }
 }
