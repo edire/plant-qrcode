@@ -172,6 +172,7 @@ $('.js-change-submit').on('click', function  () {
 
 $('#addModal').on('show.bs.modal', function () {
     $('.js-new-plant-form').get(0).reset();
+    $('.js-picarea .img').attr('src', '');
 })
 
 $(".js-upload-img").click(function(e) {
