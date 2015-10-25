@@ -141,7 +141,7 @@ $('.info-list').on('click', '.js-code-btn', function () {
     $('.js-qrcode-img').attr('src', '');
     var dom = $(this).closest('.list-item');
     var name = dom.find('.js-name').text();
-    var id =dom.attr('data-id');
+    var id = dom.attr('data-id');
     var url = 'http://qr.liantu.com/api.php?w=300&text=' + app.root + '/plant.html?pid=' + id;
     $('.js-qrcode-img').attr('src', url);
     $('.js-code-name-box').text(name);
