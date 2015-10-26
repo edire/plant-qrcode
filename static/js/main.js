@@ -63,6 +63,7 @@ $('.js-submit-new').on('click', function () {
         success: function (data) {
             if (data.code == 0) {
                 alert('成功');
+                $('#addModal').modal('hide');
             } else if(data.code == -2) {
                 $('#loginModal').modal();
             } else {
@@ -142,7 +143,7 @@ $('.info-list').on('click', '.js-code-btn', function () {
     var dom = $(this).closest('.list-item');
     var name = dom.find('.js-name').text();
     var id = dom.attr('data-id');
-    var url = 'http://qr.liantu.com/api.php?w=300&text=' + app.root + '/plant.html?pid=' + id;
+    var url = 'http://qr.liantu.com/api.php?w=300&text=' + app.root + '/plant.html?pid=' + id + '&logo=http://7xnsf1.com1.z0.glb.clouddn.com/common/center.png';
     $('.js-qrcode-img').attr('src', url);
     $('.js-code-name-box').text(name);
     $('#qrCodeModal').modal();
