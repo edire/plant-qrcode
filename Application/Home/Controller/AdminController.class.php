@@ -50,8 +50,13 @@ class AdminController extends Controller {
     public function listPlant () {
         $pageSize = I('get.pageSize');
         $pageNum = I('get.pageNum');
+        $type = I('get.type');
         $plantModel = M('plant');
-        $dataList = $plantModel -> limit($pageSize) -> page($pageNum) -> select();
+        if ($type == 1) {
+            $dataList = $plantModel -> limit($pageSize) -> page($pageNum) -> order('id desc') -> select();
+        } else {
+            $dataList = $plantModel -> limit($pageSize) -> page($pageNum) -> order('convert(name using gbk)') -> select();
+        }
         if (!$dataList) {
             $this->returnAjax(null, '没有内容', -1);
             return;

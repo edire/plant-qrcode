@@ -1,4 +1,3 @@
-(function () {
 
 app.beforeLogin = false;
 $.ajax({
@@ -50,6 +49,7 @@ $('.js-info-list').on('click', '.js-change-btn', function () {
 });
 
 $('.js-submit-new').on('click', function () {
+    $(this).text('正在发布~');
     var title = $('#addModal').find('input[name="name"]').val().trim();
     if (!title) {
         alert('请填写名称');
@@ -61,14 +61,20 @@ $('.js-submit-new').on('click', function () {
         data: $('.js-new-plant-form').serialize(),
         dataType: 'json',
         success: function (data) {
+            $(this).text('保存');
             if (data.code == 0) {
                 alert('成功');
                 $('#addModal').modal('hide');
+                getList(1)
             } else if(data.code == -2) {
                 $('#loginModal').modal();
             } else {
                 alert(data.msg);
             }
+        },
+        error: function () {
+            $(this).text('保存');
+            alert('未知错误~');
         }
     });
 })
@@ -171,54 +177,62 @@ $('.js-change-submit').on('click', function  () {
     });
 })
 
+$('.js-order-by').on('click', function () {
+    listModel.type == 1 ? listModel.type = 2 : listModel.type = 1;
+    var d = $(this).find('span');
+    d.text() == '时间' ? d.text('名称') : d.text('时间');
+    getList(1);
+})
 $('#addModal').on('show.bs.modal', function () {
     $('.js-new-plant-form').get(0).reset();
     $('.js-picarea .img').attr('src', '');
 })
 
-$(".js-upload-img").click(function(e) {
-    var btn = $(this);
-    e.preventDefault();
-        // 上传方法
-        $.upload({
-                // 上传地址
-                url: app.root + '/qrcode.php?m=home&c=admin&a=uploadImg',
-                // 文件域名字
-                fileName: 'file',
-                // 上传完成后, 返回json, text
-                dataType: 'json',
-                // 上传之前回调,return true表示可继续上传
-                onSend: function(data) {
 
-                    return true;
-                },
-                onSubmit: function (data) {
-                    var file = $(data.target).find('input').get(0).files[0];
-                    if (file.size > 10000000) {
-                        alert('请上传小于10M的图片');
-                        return false;
-                    }
-                    if (file.type.indexOf('image') == -1) {
-                        alert('请上传图片文件 jpg/gif/png');
-                        return false;
-                    }
-                },
-                // 上传之后回调
-                onComplate: function(data) {
-                    if (data && data.code == 0) {
-                        var name = data.data.name;
-                        btn.closest('.js-picarea').find('.img').attr('src', app.root + '/upload/' + name);
-                        btn.closest('.js-picarea').find('.js-img-input').val(name);
-                    } else {
-                        alert(data.msg);
-                        return;
-                    }
-                }
-        });
-});
+    qiniuUpload('newUpload1', added, process, end, key);
+    qiniuUpload('newUpload2', added, process, end, key);
+    qiniuUpload('newUpload3', added, process, end, key);
+    qiniuUpload('newUpload4', added, process, end, key);
+    qiniuUpload('newUpload5', added, process, end, key);
+    qiniuUpload('newUpload6', added, process, end, key);
+    qiniuUpload('newUpload7', added, process, end, key);
+    qiniuUpload('newUpload8', added, process, end, key);
+    function added(up, files) {
+        var file = files[0];
+        if (file.size > 10000000) {
+            alert('请上传小于10M的图片');
+
+                up.removeFile(file);
+                up.stop();
+                up.start();
+        }
+        if (file.type.indexOf('image') == -1) {
+            alert('请上传图片文件 jpg/gif/png');
+                up.removeFile(file);
+                up.stop();
+                up.start();
+        }
+    }
+    function process (up,file,button) {
+        $('#'+button).text(up.total.percent + '%');
+    }
+    function end (up, file, info, button) {
+        var name = JSON.parse(info).key;
+        $('#'+button).closest('.js-picarea').find('.img').attr('src', app.qiniu + name);
+        $('#'+button).closest('.js-picarea').find('.js-img-input').val(name);
+    }
+    function key (up, files) {
+        var file = files;
+        var fileName = file.name;
+        var l = fileName.lastIndexOf('.')
+        var suffix = fileName.substr(l);
+        var name = Math.ceil(Math.random() * 100).toString() + new Date().getTime().toString() + suffix;
+        return name;
+    }
 
 var listModel = {};
 listModel.pageSize = 20;
+listModel.type = 1;
 
 initList();
 
@@ -233,7 +247,8 @@ function initList () {
 function getList (pageNum, pageSize) {
     var param = {
         pageNum: pageNum,
-        pageSize: pageSize || 20
+        pageSize: pageSize || listModel.pageSize,
+        type: listModel.type
     }
     $.ajax({
         url: app.root + '/qrcode.php?m=home&c=admin&a=listPlant',
@@ -329,8 +344,8 @@ function setForm (data) {
         $('input[name="'+x+'"]').val(data[x]);
         $('textarea[name="'+x+'"]').text(data[x]);
         if (x.indexOf('pic') > -1) {
-            $('.'+x).attr('src', app.root+ '/upload/' + data[x]);
+            $('.'+x).attr('src', app.qiniu + data[x]);
         }
     }
 }
-})();
+// })();
