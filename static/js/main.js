@@ -50,6 +50,7 @@ $('.js-info-list').on('click', '.js-change-btn', function () {
 
 $('.js-submit-new').on('click', function () {
     $(this).text('正在发布~');
+    var btn = $(this);
     var title = $('#addModal').find('input[name="name"]').val().trim();
     if (!title) {
         alert('请填写名称');
@@ -61,7 +62,7 @@ $('.js-submit-new').on('click', function () {
         data: $('.js-new-plant-form').serialize(),
         dataType: 'json',
         success: function (data) {
-            $(this).text('保存');
+            btn.text('保存');
             if (data.code == 0) {
                 alert('成功');
                 $('#addModal').modal('hide');
@@ -73,7 +74,7 @@ $('.js-submit-new').on('click', function () {
             }
         },
         error: function () {
-            $(this).text('保存');
+            btn.text('保存');
             alert('未知错误~');
         }
     });
