@@ -344,7 +344,7 @@ function setForm (data) {
         $('input[name="'+x+'"]').val(data[x]);
         $('textarea[name="'+x+'"]').text(data[x]);
         if (x.indexOf('pic') > -1) {
-            $('.'+x).attr('src', app.qiniu + data[x]);
+            $('.'+x).attr('src', app.qiniu + '/' + data[x]);
         }
     }
 }
