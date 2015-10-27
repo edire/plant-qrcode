@@ -1,6 +1,6 @@
 var uptoken;
 $.ajax({
-    url: 'http://zhiwu.lysjjd.com/qiniu/q.php',
+    url: app.root + '/qiniu/q.php',
     type: 'get',
     dataType: 'json',
     async: false,
