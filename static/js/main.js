@@ -18,7 +18,6 @@ $.ajax({
 
 
 
-var navigation = responsiveNav("foo", {customToggle: ".nav-toggle"});
 
 app.currentChange = 0;
 

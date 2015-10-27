@@ -661,3 +661,4 @@
   }
 
 }(document, window, 0));
+var navigation = responsiveNav("foo", {customToggle: ".nav-toggle"});
