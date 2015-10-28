@@ -74,30 +74,30 @@ html { overflow-y: scroll; }
     margin-top: 20px;
 }
 .ml5 {
-    margin-top: 5px;
+    margin-left: 5px;
 }
 .ml10 {
-    margin-top: 10px;
+    margin-left: 10px;
 }
 .ml20 {
-    margin-top: 20px;
+    margin-left: 20px;
 }
 .mr5 {
-    margin-top: 5px;
+    margin-right: 5px;
 }
 .mr10 {
-    margin-top: 10px;
+    margin-right: 10px;
 }
 .mr20 {
-    margin-top: 20px;
+    margin-right: 20px;
 }
 .mb5 {
-    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .mb10 {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .mb20 {
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 

@@ -2,13 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
     <title>加载中...</title>
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/front.css">
 </head>
 <body>
-    <div></div>
+    <header class="header">
+        <img src="./static/images/center.png" alt="" width="30" class="logo">
+        <p>综合实践活动百科</p>
+    </header>
+    <section class="mt5 mb5 ml5 mr5">
+        <div class="input-group">
+          <input type="text" class="form-control js-search-input" placeholder="输入文字查找">
+          <span class="input-group-btn js-search-btn">
+            <button class="btn btn-default" type="button"><i class="glyphicon glyphicon-search"></i></button>
+          </span>
+        </div>
+    </section>
+    <section class="plant-info mt20">
+    </section>
+</body>
+    <script src="http://apps.bdimg.com/libs/seajs/2.3.0/sea.js"></script>
+    <script src="http://apps.bdimg.com/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="./static/js/config.js"></script>
-    <script src="./static/js/plant.js"></script>
-</body>
+    <script>
+        // seajs 的简单配置
+        seajs.config({
+            base: "./static/js/",
+            alias: {
+            }
+        });
+
+        // 加载入口模块
+        seajs.use("./static/js/plant.js");
+    </script>
 </html>

@@ -1,3 +1,58 @@
+
+.campus-spinner {
+    margin: 100px auto;
+    width: 50px;
+    height: 60px;
+    text-align: center;
+    font-size: 10px;
+}
+
+.campus-spinner > div {
+    background-color: #67CF22;
+    height: 100%;
+    width: 6px;
+    display: inline-block;
+
+    -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+    animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+.campus-spinner .rect2 {
+    -webkit-animation-delay: -1.1s;
+    animation-delay: -1.1s;
+}
+
+.campus-spinner .rect3 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.campus-spinner .rect4 {
+    -webkit-animation-delay: -0.9s;
+    animation-delay: -0.9s;
+}
+
+.campus-spinner .rect5 {
+    -webkit-animation-delay: -0.8s;
+    animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+    0%, 40%, 100% { -webkit-transform: scaleY(0.4) } 
+    20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4);
+        -webkit-transform: scaleY(0.4);
+        }  20% {
+            transform: scaleY(1.0);
+            -webkit-transform: scaleY(1.0);
+        }
+    }
+
+
 .header {
     position: relative;
     min-width: 320px;
@@ -19,8 +74,51 @@
 }
 .header-nav.nav-tabs>li {
     width: 50%;
+    text-align: center;
 }
 .item-list .item a {
     display: block;
     text-decoration: none;
+}
+.item-list .img-box {
+    width: 100%;
+    height: 108px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.item-list .img-thumbnail {
+    border: none;
+}
+.item-list .item {
+    height: 170px;
+    overflow: hidden;
+}
+.item-list .load-more {
+    display: block;
+    background: #F5F5F5;
+    display: none;
+}
+.item-list .fixed-search-back {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 100;
+}
+.plant-info {
+    word-break: break-all;
+    font-size: 14px;
+}
+.plant-info .plant-name {
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 8px;
+    border-left: 2px solid #459df5;
+    line-height: 1.5;
+    margin-left: 15px;
+}
+.plant-info .info-image {
+    width: 90%;
+    display: block;
+    margin: 0 auto;
 }
