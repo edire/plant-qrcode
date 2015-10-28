@@ -39,7 +39,7 @@ class AdminController extends Controller {
     {
         $key = I('get.key');
         $plantModel = M('plant');
-        $condition['name'] = array('like', "%$key%");
+        $condition['name|alias|genera|flowerfruit|distribution|look|leaf|flower|fruit|effect|eat|feature|stalk'] = array('like', "%$key%");
         $result = $plantModel->where($condition)->select();
         if (!$result) {
             $this->returnAjax(null, '没有搜索到数据', -1);

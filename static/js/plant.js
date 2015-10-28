@@ -28,7 +28,7 @@ $.ajax({
         }
     },
     error: function () {
-        alert('刷新重试')
+        alert('刷新重试');
     }
 });
 
