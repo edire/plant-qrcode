@@ -24,6 +24,7 @@ define(function(require, exports, module) {
                     },
                     dataType: 'json',
                     success: function (data) {
+                        _pri.util.setTitle(data.data.name);
                         if (data.code == 0) {
                             _pri.util.render(data.data);
                         } else {
@@ -44,6 +45,17 @@ define(function(require, exports, module) {
                     return "";
                 }
                 return result[1];
+            },
+            setTitle: function (title) {
+                var $body = $('body');
+                document.title = title;
+                // hack在微信等webview中无法修改document title情况
+                var $iframe = $('<iframe src="./src/css/img/campus.ico" style="visibility: hidden;"></iframe>');
+                $iframe.on('load',function() {
+                    setTimeout(function() {
+                        $iframe.off('load').remove();
+                    }, 0);
+                }).appendTo($body);
             }
         }
 
