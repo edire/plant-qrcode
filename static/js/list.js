@@ -24,6 +24,8 @@ define(function(require, exports, module) {
                     pageSize: pageSize || _pri.conf.pageSize,
                     type: 1
                 }
+                if($('.load-more').hasClass('disabled')) return;
+                $('.load-more').text('加载中...').addClass('disabled');
                 $.ajax({
                     url: app.root + '/qrcode.php?m=home&c=admin&a=listPlant',
                     type: 'get',
@@ -44,6 +46,9 @@ define(function(require, exports, module) {
                     },
                     error: function () {
                         alert('服务器错误~');
+                    },
+                    complete: function () {
+                        $('.load-more').text('加载下一页').removeClass('disabled');
                     }
                 });
             },
