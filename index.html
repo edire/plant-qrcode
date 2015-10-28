@@ -18,38 +18,25 @@
         <li role="presentation"><a href="#">实践活动项目百科</a></li>
     </ul>
     <section class="item-list mt20">
-        <ul class="list-box clearfix">
-            <li class="item col-xs-6">
-                <a href="#asa">
-                    <div class="thumbnail">
-                      <img src="./static/images/center.png" class="img-thumbnail">
-                      <div class="caption">
-                        <h3>Thumbnail label</h3>
-                      </div>
-                    </div>
-                </a>
-            </li>
-            <li class="item col-xs-6">
-                <div class="thumbnail">
-                  <img src="./static/images/center.png" class="img-thumbnail">
-                  <div class="caption">
-                    <h3>Thumbnail label</h3>
-                  </div>
-                </div>
-            </li>
-            <li class="item col-xs-6">
-                <div class="thumbnail">
-                  <img src="./static/images/center.png" class="img-thumbnail">
-                  <div class="caption">
-                    <h3>Thumbnail label</h3>
-                  </div>
-                </div>
-            </li>
+        <ul class="list-box clearfix js-list-box">
+
         </ul>
     </section>
 </body>
+    <script src="http://apps.bdimg.com/libs/seajs/2.3.0/sea.js"></script>
+    <script src="http://apps.bdimg.com/libs/underscore.js/1.7.0/underscore-min.js"></script>
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script src="./static/js/config.js"></script>
-    <script src="./static/js/index.js"></script>
+    <script>
+        // seajs 的简单配置
+        seajs.config({
+            base: "./static/js/",
+            alias: {
+            }
+        });
+
+        // 加载入口模块
+        seajs.use("./static/js/index.js");
+    </script>
 </html>
