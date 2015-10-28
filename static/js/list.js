@@ -14,7 +14,7 @@ define(function(require, exports, module) {
             })
         },
         conf: {
-            pageSize: 20,
+            pageSize: 40,
             currentPage: 1
         },
         util: {
