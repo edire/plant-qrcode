@@ -27,7 +27,7 @@ define(function(require, exports, module) {
                 if($('.load-more').hasClass('disabled')) return;
                 $('.load-more').text('加载中...').addClass('disabled');
                 $.ajax({
-                    url: app.root + '/qrcode.php?m=home&c=admin&a=listPlant',
+                    url: app.root + '/qrcode.php?m=home&c=index&a=listPlant',
                     type: 'get',
                     data: param,
                     dataType: 'json',
@@ -59,7 +59,7 @@ define(function(require, exports, module) {
                     return;
                 }
                 $.ajax({
-                    url: app.root + '/qrcode.php?m=home&c=admin&a=search',
+                    url: app.root + '/qrcode.php?m=home&c=index&a=search',
                     type: 'get',
                     data: {
                         key: key
