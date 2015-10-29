@@ -178,9 +178,17 @@ $('.js-change-submit').on('click', function  () {
 })
 
 $('.js-order-by').on('click', function () {
-    listModel.type == 1 ? listModel.type = 2 : listModel.type = 1;
     var d = $(this).find('span');
-    d.text() == '时间' ? d.text('名称') : d.text('时间');
+    if (listModel.type == 1) {
+        listModel.type = 2;
+        d.text('名称');
+    } else if (listModel.type == 2) {
+        listModel.type = 3;
+        d.text('sid');
+    } else if (listModel.type == 3) {
+        listModel.type = 1;
+        d.text('时间');
+    }
     getList(1);
 })
 $('#addModal').on('show.bs.modal', function () {
@@ -285,8 +293,11 @@ var html = '';
 for (var i =0, len = list.length; i < len; i ++) {
     html +=
                 '<li class="row list-item" data-id="'+list[i].id+'">' +
-                    '<div class="col-xs-8 js-name">' +
+                    '<div class="col-xs-6 js-name">' +
                         list[i].name +
+                    '</div>' +
+                    '<div class="col-xs-2 js-name">' +
+                        'sid: ' + list[i].sid +
                     '</div>' +
                     '<div class="col-xs-4">' +
                         '<button class="btn btn-default js-code-btn">二维码</button>' +

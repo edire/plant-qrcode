@@ -9,7 +9,7 @@ define(function(require, exports, module) {
                                 '<img src="<%=app.qiniu + \"/\" + item.pic1%>" class="img-thumbnail">',
                             '</div>',
                           '<div class="caption">',
-                            '<h3><%=item.name%></h3>',
+                            '<h3><%=item.name%> <br>别名：<%=item.alias%></h3>',
                           '</div>',
                         '</div>',
                     '</a>',

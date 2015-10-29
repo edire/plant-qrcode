@@ -26,10 +26,34 @@ class IndexController extends Controller {
     {
         $key = I('get.key');
         $plantModel = M('plant');
-        $condition['name|alias|genera|flowerfruit|distribution|look|leaf|flower|fruit|effect|eat|feature|stalk'] = array('like', "%$key%");
+        $condition['name|sid|alias|genera|flowerfruit|distribution|look|leaf|flower|fruit|effect|eat|feature|stalk'] = array('like', "%$key%");
         $result = $plantModel->where($condition)->select();
         if (!$result) {
             $this->returnAjax(null, '没有搜索到数据', -1);
+            return;
+        }
+        $this->returnAjax($result, '搜索成功', 0);
+    }
+    public function next()
+    {
+        $key = I('get.sid');
+        $plantModel = M('plant');
+        $map['sid'] = array('gt', $key);
+        $result = $plantModel -> where($map) -> order('sid') -> find();
+        if (!$result) {
+            $this->returnAjax(null, '已经没有数据了', -1);
+            return;
+        }
+        $this->returnAjax($result, '搜索成功', 0);
+    }
+    public function prev()
+    {
+        $key = I('get.sid');
+        $plantModel = M('plant');
+        $map['sid'] = array('lt', $key);
+        $result = $plantModel -> where($map) -> order('sid desc') -> find();
+        if (!$result) {
+            $this->returnAjax(null, '已经没有数据了', -1);
             return;
         }
         $this->returnAjax($result, '搜索成功', 0);

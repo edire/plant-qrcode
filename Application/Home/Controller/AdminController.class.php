@@ -18,7 +18,13 @@ class AdminController extends Controller {
     }
     public function createPlant() {
         $post = I('post.');
-        $result = M('plant')->add($post);
+        $plantModel = M('plant');
+        $sid = $plantModel->where('sid='.$post['sid'])->find();
+        if ($sid) {
+            $this->returnAjax(null, 'sid重复！', -1);
+            return;
+        }
+        $result = $plantModel->add($post);
         if (!$result) {
             $this->returnAjax(null, '添加失败', -1);
             return;
@@ -39,7 +45,7 @@ class AdminController extends Controller {
     {
         $key = I('get.key');
         $plantModel = M('plant');
-        $condition['name|alias|genera|flowerfruit|distribution|look|leaf|flower|fruit|effect|eat|feature|stalk'] = array('like', "%$key%");
+        $condition['name|sid|alias|genera|flowerfruit|distribution|look|leaf|flower|fruit|effect|eat|feature|stalk'] = array('like', "%$key%");
         $result = $plantModel->where($condition)->select();
         if (!$result) {
             $this->returnAjax(null, '没有搜索到数据', -1);
@@ -54,8 +60,10 @@ class AdminController extends Controller {
         $plantModel = M('plant');
         if ($type == 1) {
             $dataList = $plantModel -> limit($pageSize) -> page($pageNum) -> order('id desc') -> select();
-        } else {
+        } else if($type == 2) {
             $dataList = $plantModel -> limit($pageSize) -> page($pageNum) -> order('convert(name using gbk)') -> select();
+        } else {
+            $dataList = $plantModel -> limit($pageSize) -> page($pageNum) -> order('sid') -> select();
         }
         if (!$dataList) {
             $this->returnAjax(null, '没有内容', -1);
@@ -89,55 +97,62 @@ class AdminController extends Controller {
         $arr = I('post.');
         $id = $arr['id'];
         unset($arr['id']);
-        $result = M('plant')->where('id='.$id)->save($arr);
-        if (!$result) {
+        $plantModel = M('plant');
+        $sid = $plantModel->where('sid='.$arr['sid'])->find();
+        if ($sid && ($sid['id'] != $id)) {
+            $this->returnAjax(null, 'sid重复！', -1);
+            return;
+        }
+        $con = array('id'=>$id);
+        $result = $plantModel->where($con)->save($arr);
+        if (!$result && $result != 0) {
             $this->returnAjax(null, '保存失败', -1);
             return;
         }
         $this->returnAjax($result[0], '保存成功', 0);
     }
-    public function uploadImg ()
-    {
-        if ((($_FILES["file"]["type"] == "image/gif")
-        || ($_FILES["file"]["type"] == "image/jpeg")
-        || ($_FILES["file"]["type"] == "image/pjpeg")
-        || ($_FILES["file"]["type"] == "image/png"))
-        && ($_FILES["file"]["size"] < 10000000))
-          {
-            $name = time().rand();
-            switch ($_FILES["file"]["type"]) {
-                case 'image/gif':
-                    $fullName = $name.'.gif';
-                    break;
-                case 'image/jpeg':
-                    $fullName = $name.'.jpg';
-                    break;
-                case 'image/pjpeg':
-                    $fullName = $name.'.jpg';
-                    break;
-                case 'image/png':
-                    $fullName = $name.'.png';
-                    break;
-            }
-            $a = move_uploaded_file($_FILES["file"]["tmp_name"],
-                                UPLOAD_PATH . $fullName);
-            if ($a){
-                $result = array('name'=> $fullName);
-                $this->returnAjax($result, '保存成功', 0);
-            } else {
-                $this->returnAjax(null, '文件保存失败', -1);
-            }
-          } else {
-            $this->returnAjax(null, '文件格式 gif/jpg/png 小于10M', -1);
-          }
+    // public function uploadImg ()
+    // {
+    //     if ((($_FILES["file"]["type"] == "image/gif")
+    //     || ($_FILES["file"]["type"] == "image/jpeg")
+    //     || ($_FILES["file"]["type"] == "image/pjpeg")
+    //     || ($_FILES["file"]["type"] == "image/png"))
+    //     && ($_FILES["file"]["size"] < 10000000))
+    //       {
+    //         $name = time().rand();
+    //         switch ($_FILES["file"]["type"]) {
+    //             case 'image/gif':
+    //                 $fullName = $name.'.gif';
+    //                 break;
+    //             case 'image/jpeg':
+    //                 $fullName = $name.'.jpg';
+    //                 break;
+    //             case 'image/pjpeg':
+    //                 $fullName = $name.'.jpg';
+    //                 break;
+    //             case 'image/png':
+    //                 $fullName = $name.'.png';
+    //                 break;
+    //         }
+    //         $a = move_uploaded_file($_FILES["file"]["tmp_name"],
+    //                             UPLOAD_PATH . $fullName);
+    //         if ($a){
+    //             $result = array('name'=> $fullName);
+    //             $this->returnAjax($result, '保存成功', 0);
+    //         } else {
+    //             $this->returnAjax(null, '文件保存失败', -1);
+    //         }
+    //       } else {
+    //         $this->returnAjax(null, '文件格式 gif/jpg/png 小于10M', -1);
+    //       }
 
-        if(!$info) {// 上传错误提示错误信息
-            $this->error($upload->getError());
-        }else{// 上传成功
-            var_dump($info);
-            $this->success('上传成功！');
-        }
-        $this->returnAjax(null, '保存成功', 0);
+    //     if(!$info) {// 上传错误提示错误信息
+    //         $this->error($upload->getError());
+    //     }else{// 上传成功
+    //         var_dump($info);
+    //         $this->success('上传成功！');
+    //     }
+    //     $this->returnAjax(null, '保存成功', 0);
         
-    }
+    // }
 }

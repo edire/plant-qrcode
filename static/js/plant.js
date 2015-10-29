@@ -6,11 +6,20 @@ define(function(require, exports, module) {
                 var key = $('.js-search-input').val().trim();
                 location.href="index.html?key=" + key;
             });
+            $('.js-get-next').on('click', function () {
+                _pri.util.getNext();
+            });
+            $('.js-get-prev').on('click', function () {
+                _pri.util.getPrev();
+            });
         },
         conf: {
+            id: null,
+            plant: null
         },
         util:{
             getDate: function () {
+                $('.plant-info').html(_.template(view.loading.join(''))({}));
                 _pri.conf.id = _pri.util.getQuery('pid');
                 if (!_pri.conf.id) {
                     alert('缺少参数');
@@ -27,12 +36,16 @@ define(function(require, exports, module) {
                         _pri.util.setTitle(data.data.name);
                         if (data.code == 0) {
                             _pri.util.render(data.data);
+                            _pri.conf.plant = data.data;
                         } else {
                             alert(data.msg);
                         }
                     },
                     error: function () {
                         alert('刷新重试');
+                    },
+                    complete: function  () {
+                        $('.js-loading-placeholder-wrap').remove();
                     }
                 });
             },
@@ -56,6 +69,62 @@ define(function(require, exports, module) {
                         $iframe.off('load').remove();
                     }, 0);
                 }).appendTo($body);
+            },
+            getNext: function () {
+                $('.plant-info').html(_.template(view.loading.join(''))({}));
+                $.ajax({
+                    url: app.root + '/qrcode.php?m=home&c=index&a=next',
+                    type: 'get',
+                    data: {
+                        sid: _pri.conf.plant.sid
+                    },
+                    dataType: 'json',
+                    success: function (resp) {
+                        if (resp.code == 0) {
+                            history.pushState(null,null,'?pid='+resp.data.id);
+                            _pri.conf.id = resp.data.id;
+                            _pri.util.render(resp.data);
+                            _pri.conf.plant = resp.data;
+
+                        } else {
+                            $('.plant-info').empty().text('没有数据喽~');
+                            alert(resp.msg);
+                        }
+                        
+                    },
+                    error: function () {
+                        $('.plant-info').empty().text('服务器错误刷新重试~');
+                        alert('服务器错误，请联系管理员！');
+                    }
+                });
+            },
+            getPrev: function () {
+                $('.plant-info').html(_.template(view.loading.join(''))({}));
+                $.ajax({
+                    url: app.root + '/qrcode.php?m=home&c=index&a=prev',
+                    type: 'get',
+                    data: {
+                        sid: _pri.conf.plant.sid
+                    },
+                    dataType: 'json',
+                    success: function (resp) {
+                        if (resp.code == 0) {
+                            history.pushState(null,null,'?pid='+resp.data.id);
+                            _pri.conf.id = resp.data.id;
+                            _pri.util.render(resp.data);
+                            _pri.conf.plant = resp.data;
+
+                        } else {
+                            $('.plant-info').empty().text('没有数据喽~');
+                            alert(resp.msg);
+                        }
+                        
+                    },
+                    error: function () {
+                        $('.plant-info').empty().text('服务器错误刷新重试~');
+                        alert('服务器错误，请联系管理员！');
+                    }
+                });
             }
         }
 
