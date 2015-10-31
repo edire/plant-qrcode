@@ -33,7 +33,7 @@ define(function(require, exports, module) {
                     },
                     dataType: 'json',
                     success: function (data) {
-                        _pri.util.setTitle(data.data.name);
+                        _pri.util.setTitle(data.data.dataList.name);
                         if (data.code == 0) {
                             _pri.util.render(data.data);
                             _pri.conf.plant = data.data.dataList;
