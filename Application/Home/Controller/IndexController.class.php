@@ -14,12 +14,29 @@ class IndexController extends Controller {
     public function getOne ()
     {
         $id = I('get.id');
-        $result = M('plant')->where('id='.$id)->select();
+        $plantModel = M('plant');
+        $result = $plantModel->where('id='.$id)->select();
+
+        $gtMap['sid'] = array('gt', $id);
+        $gt = $plantModel -> where($gtMap) -> order('sid') -> find();
+        if ($gt)
+        {
+            $gtName = $gt['name'];
+        }
+        $ltMap['sid'] = array('lt', $id);
+        $lt = $plantModel -> where($ltMap) -> order('sid desc') -> find();
+        if ($lt)
+        {
+            $ltName = $lt['name'];
+        }
+
         if (!$result) {
             $this->returnAjax(null, '详情获取失败', -1);
             return;
         }
-        $this->returnAjax($result[0], '获取成功', 0);
+        $res['dataList'] = $result[0];
+        $res['round'] = array('prev'=> $lt, 'next' => $gt);
+        $this->returnAjax($res, '获取成功', 0);
     }
     
     public function search()

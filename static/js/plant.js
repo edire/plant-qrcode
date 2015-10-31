@@ -36,7 +36,7 @@ define(function(require, exports, module) {
                         _pri.util.setTitle(data.data.name);
                         if (data.code == 0) {
                             _pri.util.render(data.data);
-                            _pri.conf.plant = data.data;
+                            _pri.conf.plant = data.data.dataList;
                         } else {
                             alert(data.msg);
                         }
@@ -50,7 +50,9 @@ define(function(require, exports, module) {
                 });
             },
             render: function (data) {
-                $('.plant-info').empty().html(_.template(view.plantInfo.join(''))({data:data}));
+                $('.plant-info').empty().html(_.template(view.plantInfo.join(''))({data:data.dataList}));
+                $('.js-get-prev span').empty().html(data.round.prev.name);
+                $('.js-get-next span').empty().html(data.round.next.name);
             },
             getQuery: function (name) {
                 var result = location.search.match(new RegExp("[\?\&]" + name+ "=([^\&]+)","i"));
