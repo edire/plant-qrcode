@@ -107,7 +107,7 @@ body {
     padding: 0 9px;
 }
 .item-list .thumbnail .caption {
-    padding: 9px 0;
+    padding: 2px 0;
 }
 .item-list .item a {
     display: block;
@@ -128,8 +128,9 @@ body {
     overflow: hidden;
 }
 .item-list .load-more {
-    display: block;
-    background: #F5F5F5;
+    background-color: #fdeeb0;
+    border: 1px solid #e0bb46;
+    color: #930;
     display: none;
 }
 .item-list .fixed-search-back {
@@ -140,10 +141,27 @@ body {
 }
 .plant-info {
     word-break: break-all;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.plant-info .info-title {
+    border-bottom: #cfa691 1px solid;
+    margin-bottom: 10px;
+    margin: 7px 15px;
+    padding: 4px 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+.plant-info .cat{
+    display: block;
+    background-color: #cc8303;
+    color: #fff;
+    font-size: 18px;
+    padding-left: 10px;
+    border-radius: 5px;
 }
 .plant-info .plant-name {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     padding-left: 8px;
     border-left: 2px solid #459df5;
@@ -153,5 +171,13 @@ body {
 .plant-info .info-image {
     width: 90%;
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
+}
+.plant-info .info-content {
+    text-indent: 32px;
+}
+.page-btn {
+    background-color: #fdeeb0;
+    border: 1px solid #e0bb46;
+    color: #930;
 }
