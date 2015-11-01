@@ -51,8 +51,10 @@ define(function(require, exports, module) {
             },
             render: function (data) {
                 $('.plant-info').empty().html(_.template(view.plantInfo.join(''))({data:data.dataList}));
-                $('.js-get-prev span').empty().html('('+data.round.prev.name+')' || '');
-                $('.js-get-next span').empty().html('('+data.round.next.name+')' || '');
+                var left = data.round.prev ? '('+data.round.prev.name+')' : '';
+                var right = data.round.next ? '('+data.round.next.name+')' : '';
+                $('.js-get-prev span').empty().html(left);
+                $('.js-get-next span').empty().html(right);
             },
             getQuery: function (name) {
                 var result = location.search.match(new RegExp("[\?\&]" + name+ "=([^\&]+)","i"));
@@ -83,10 +85,10 @@ define(function(require, exports, module) {
                     dataType: 'json',
                     success: function (resp) {
                         if (resp.code == 0) {
-                            history.pushState(null,null,'?pid='+resp.data.id);
-                            _pri.conf.id = resp.data.id;
+                            history.pushState(null,null,'?pid='+resp.data.dataList.id);
+                            _pri.conf.id = resp.data.dataList.id;
                             _pri.util.render(resp.data);
-                            _pri.conf.plant = resp.data;
+                            _pri.conf.plant = resp.data.dataList;
 
                         } else {
                             $('.plant-info').empty().text('没有数据喽~');
@@ -111,10 +113,10 @@ define(function(require, exports, module) {
                     dataType: 'json',
                     success: function (resp) {
                         if (resp.code == 0) {
-                            history.pushState(null,null,'?pid='+resp.data.id);
-                            _pri.conf.id = resp.data.id;
+                            history.pushState(null,null,'?pid='+resp.data.dataList.id);
+                            _pri.conf.id = resp.data.dataList.id;
                             _pri.util.render(resp.data);
-                            _pri.conf.plant = resp.data;
+                            _pri.conf.plant = resp.data.dataList;
 
                         } else {
                             $('.plant-info').empty().text('没有数据喽~');

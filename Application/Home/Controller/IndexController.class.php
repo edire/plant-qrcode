@@ -53,27 +53,59 @@ class IndexController extends Controller {
     }
     public function next()
     {
-        $key = I('get.sid');
+        $id = I('get.sid');
         $plantModel = M('plant');
-        $map['sid'] = array('gt', $key);
+        $map['sid'] = array('gt', $id);
         $result = $plantModel -> where($map) -> order('sid') -> find();
+        $id = $result['id'];
+        $gtMap['sid'] = array('gt', $id);
+        $gt = $plantModel -> where($gtMap) -> order('sid') -> find();
+        if ($gt)
+        {
+            $gtName = $gt['name'];
+        }
+        $ltMap['sid'] = array('lt', $id);
+        $lt = $plantModel -> where($ltMap) -> order('sid desc') -> find();
+        if ($lt)
+        {
+            $ltName = $lt['name'];
+        }
+
         if (!$result) {
-            $this->returnAjax(null, '已经没有数据了', -1);
+            $this->returnAjax(null, '详情获取失败', -1);
             return;
         }
-        $this->returnAjax($result, '搜索成功', 0);
+        $res['dataList'] = $result;
+        $res['round'] = array('prev'=> $lt, 'next' => $gt);
+        $this->returnAjax($res, '获取成功', 0);
     }
     public function prev()
     {
-        $key = I('get.sid');
+        $id = I('get.sid');
         $plantModel = M('plant');
-        $map['sid'] = array('lt', $key);
+        $map['sid'] = array('lt', $id);
         $result = $plantModel -> where($map) -> order('sid desc') -> find();
+        $id = $result['id'];
+        $gtMap['sid'] = array('gt', $id);
+        $gt = $plantModel -> where($gtMap) -> order('sid') -> find();
+        if ($gt)
+        {
+            $gtName = $gt['name'];
+        }
+        $ltMap['sid'] = array('lt', $id);
+        $lt = $plantModel -> where($ltMap) -> order('sid desc') -> find();
+        if ($lt)
+        {
+            $ltName = $lt['name'];
+        }
+
         if (!$result) {
-            $this->returnAjax(null, '已经没有数据了', -1);
+            $this->returnAjax(null, '详情获取失败', -1);
             return;
         }
-        $this->returnAjax($result, '搜索成功', 0);
+        $res['dataList'] = $result;
+        $res['round'] = array('prev'=> $lt, 'next' => $gt);
+        $this->returnAjax($res, '获取成功', 0);
     }
     public function listPlant () {
         $pageSize = I('get.pageSize');
