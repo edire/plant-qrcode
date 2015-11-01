@@ -16,14 +16,14 @@ class IndexController extends Controller {
         $id = I('get.id');
         $plantModel = M('plant');
         $result = $plantModel->where('id='.$id)->select();
-
-        $gtMap['sid'] = array('gt', $id);
+        $sid = $result[0]['sid'];
+        $gtMap['sid'] = array('gt', $sid);
         $gt = $plantModel -> where($gtMap) -> order('sid') -> find();
         if ($gt)
         {
             $gtName = $gt['name'];
         }
-        $ltMap['sid'] = array('lt', $id);
+        $ltMap['sid'] = array('lt', $sid);
         $lt = $plantModel -> where($ltMap) -> order('sid desc') -> find();
         if ($lt)
         {
@@ -35,7 +35,7 @@ class IndexController extends Controller {
             return;
         }
         $res['dataList'] = $result[0];
-        $res['round'] = array('prev'=> $lt, 'next' => $gt);
+        $res['round'] = array('prev'=> $ltName, 'next' => $gtName);
         $this->returnAjax($res, '获取成功', 0);
     }
     
@@ -57,14 +57,14 @@ class IndexController extends Controller {
         $plantModel = M('plant');
         $map['sid'] = array('gt', $id);
         $result = $plantModel -> where($map) -> order('sid') -> find();
-        $id = $result['id'];
-        $gtMap['sid'] = array('gt', $id);
+        $sid = $result['sid'];
+        $gtMap['sid'] = array('gt', $sid);
         $gt = $plantModel -> where($gtMap) -> order('sid') -> find();
         if ($gt)
         {
             $gtName = $gt['name'];
         }
-        $ltMap['sid'] = array('lt', $id);
+        $ltMap['sid'] = array('lt', $sid);
         $lt = $plantModel -> where($ltMap) -> order('sid desc') -> find();
         if ($lt)
         {
@@ -76,7 +76,7 @@ class IndexController extends Controller {
             return;
         }
         $res['dataList'] = $result;
-        $res['round'] = array('prev'=> $lt, 'next' => $gt);
+        $res['round'] = array('prev'=> $ltName, 'next' => $gtName);
         $this->returnAjax($res, '获取成功', 0);
     }
     public function prev()
@@ -85,26 +85,25 @@ class IndexController extends Controller {
         $plantModel = M('plant');
         $map['sid'] = array('lt', $id);
         $result = $plantModel -> where($map) -> order('sid desc') -> find();
-        $id = $result['id'];
-        $gtMap['sid'] = array('gt', $id);
+        $sid = $result['sid'];
+        $gtMap['sid'] = array('gt', $sid);
         $gt = $plantModel -> where($gtMap) -> order('sid') -> find();
         if ($gt)
         {
             $gtName = $gt['name'];
         }
-        $ltMap['sid'] = array('lt', $id);
+        $ltMap['sid'] = array('lt', $sid);
         $lt = $plantModel -> where($ltMap) -> order('sid desc') -> find();
         if ($lt)
         {
             $ltName = $lt['name'];
         }
-
         if (!$result) {
             $this->returnAjax(null, '详情获取失败', -1);
             return;
         }
         $res['dataList'] = $result;
-        $res['round'] = array('prev'=> $lt, 'next' => $gt);
+        $res['round'] = array('prev'=> $ltName, 'next' => $gtName);
         $this->returnAjax($res, '获取成功', 0);
     }
     public function listPlant () {

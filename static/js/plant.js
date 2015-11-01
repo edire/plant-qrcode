@@ -33,7 +33,6 @@ define(function(require, exports, module) {
                     },
                     dataType: 'json',
                     success: function (data) {
-                        _pri.util.setTitle(data.data.dataList.name);
                         if (data.code == 0) {
                             _pri.util.render(data.data);
                             _pri.conf.plant = data.data.dataList;
@@ -50,9 +49,21 @@ define(function(require, exports, module) {
                 });
             },
             render: function (data) {
+                _pri.util.setTitle(data.dataList.name);
                 $('.plant-info').empty().html(_.template(view.plantInfo.join(''))({data:data.dataList}));
-                var left = data.round.prev ? '('+data.round.prev.name+')' : '';
-                var right = data.round.next ? '('+data.round.next.name+')' : '';
+                var left = data.round.prev ? '('+data.round.prev+')' : '';
+                var right = data.round.next ? '('+data.round.next+')' : '';
+                if (left) {
+                    $('.js-get-prev').show()
+                } else {
+                    $('.js-get-prev').hide()
+
+                }
+                if (right) {
+                    $('.js-get-next').show()
+                } else {
+                    $('.js-get-next').hide()
+                }
                 $('.js-get-prev span').empty().html(left);
                 $('.js-get-next span').empty().html(right);
             },
