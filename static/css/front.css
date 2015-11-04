@@ -122,6 +122,7 @@ body {
 }
 .item-list .img-thumbnail {
     border: none;
+    width: 100%;
 }
 .item-list .item {
     height: 170px;
