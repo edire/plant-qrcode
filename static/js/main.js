@@ -23,7 +23,9 @@ app.currentChange = 0;
 
 
 $('.js-info-list').on('click', '.js-change-btn', function () {
-    $('.js-change-plant-form').get(0).reset()
+    $('.js-change-plant-form').get(0).reset();
+    $('.js-change-plant-form').find('input').val('');
+    $('.js-change-plant-form').find('.js-upload-img').text('上传');
     $('#changeModal').modal();
     var dom = $(this).closest('.list-item');
     var id =dom.attr('data-id');
@@ -193,9 +195,13 @@ $('.js-order-by').on('click', function () {
 })
 $('#addModal').on('show.bs.modal', function () {
     $('.js-new-plant-form').get(0).reset();
+    $('.js-new-plant-form').find('input').val('');
+    $('.js-new-plant-form').find('.js-upload-img').text('上传');
     $('.js-picarea .img').attr('src', '');
 })
-
+$('.js-delete-img').on('click', function () {
+    $(this).closest('.js-picarea').find('.js-img-input').val('').end().find('.js-upload-img').text('上传').end().find('.img').attr('src', '');
+})
 
     qiniuUpload('newUpload1', added, process, end, key);
     qiniuUpload('newUpload2', added, process, end, key);
@@ -226,7 +232,7 @@ $('#addModal').on('show.bs.modal', function () {
     }
     function end (up, file, info, button) {
         var name = JSON.parse(info).key;
-        $('#'+button).closest('.js-picarea').find('.img').attr('src', app.qiniu + name);
+        $('#'+button).closest('.js-picarea').find('.img').attr('src', app.qiniu+ '/' + name);
         $('#'+button).closest('.js-picarea').find('.js-img-input').val(name);
     }
     function key (up, files) {
