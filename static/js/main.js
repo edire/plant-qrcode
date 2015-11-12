@@ -126,6 +126,10 @@ $('.js-return-btn').on('click', function () {
 })
 
 $('.info-list').on('click', '.js-delete-btn', function () {
+    var flag = confirm('确定要删除吗？');
+    if (!flag) {
+        return;
+    }
     var dom = $(this).closest('.list-item');
     var id =dom.attr('data-id');
     $.ajax({
