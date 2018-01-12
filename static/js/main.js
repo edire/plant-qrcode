@@ -155,7 +155,7 @@ $('.info-list').on('click', '.js-code-btn', function () {
     var dom = $(this).closest('.list-item');
     var name = dom.find('.js-name').text();
     var id = dom.attr('data-id');
-    var url = 'https://cli.im/api/qrcode/code?text=' + app.root + '/plant.html?pid=' + id;
+    var url = 'https://cli.im/api/qrcode/code?text=' + encodeURIComponent(app.root + '/plant.html?pid=' + id);
     $('.js-qrcode-img').attr('src', url);
     $('.js-code-name-box').text(name);
     $('#qrCodeModal').modal();
