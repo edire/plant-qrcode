@@ -155,7 +155,7 @@ $('.info-list').on('click', '.js-code-btn', function () {
     var dom = $(this).closest('.list-item');
     var name = dom.find('.js-name').text();
     var id = dom.attr('data-id');
-    var url = 'http://qr.liantu.com/api.php?w=300&text=' + app.root + '/plant.html?pid=' + id + '&logo=http://7xnsf1.com1.z0.glb.clouddn.com/common/center.png';
+    var url = 'https://cli.im/api/qrcode/code?text=' + app.root + '/plant.html?pid=' + id + ';
     $('.js-qrcode-img').attr('src', url);
     $('.js-code-name-box').text(name);
     $('#qrCodeModal').modal();
