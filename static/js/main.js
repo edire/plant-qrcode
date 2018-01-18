@@ -303,7 +303,7 @@ var html = '';
 for (var i =0, len = list.length; i < len; i ++) {
     html +=
                 '<li class="row list-item" data-id="'+list[i].id+'">' +
-                    '<div class="col-xs-6 js-name">' +
+                    '<div class="col-xs-4 js-name">' +
                         list[i].name +
                     '</div>' +
                     '<div class="col-xs-2 js-name">' +
