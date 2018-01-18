@@ -307,7 +307,10 @@ for (var i =0, len = list.length; i < len; i ++) {
                         list[i].name +
                     '</div>' +
                     '<div class="col-xs-2 js-name">' +
-                        'sid: ' + list[i].sid +
+                        '编号: ' + list[i].pid +
+                    '</div>' +
+                    '<div class="col-xs-2 js-name">' +
+                        '排序: ' + list[i].sid +
                     '</div>' +
                     '<div class="col-xs-4">' +
                         '<button class="btn btn-default js-code-btn">二维码</button>' +
