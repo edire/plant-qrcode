@@ -25,6 +25,7 @@ function drawIco(context) {
         var image = new Image();
         image.src = "1.png";
 
+        context.textBaseline = 'middle';
         context.font = '14px STXingKai';
         context.fillText('临沂中小学生综合实践基地', 100, 360)
         image.onload = function() {

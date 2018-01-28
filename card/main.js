@@ -16,6 +16,7 @@ async function aaa() {
             genus: '',
             id: id
         })
+        // document.body.append(canvas)
         var buffer = canvasBuffer(canvas, 'image/png')
         fs.writeFile(`./images/${id}-${name}.png`, buffer, function(err) {
             console.log(i)
