@@ -42,7 +42,7 @@ function drawIco(context) {
 function drawQRcode(context, id) {
     return new Promise(r => {
         var image = new Image();
-        image.crossOrigin = 'anonymous'
+        image.setAttribute('crossOrigin', 'anonymous');
         image.src = `http://mobile.qq.com/qrcode?url=http%3A%2F%2Fshijianjidi.fanmingfei.com%2Fplant.html%3Fpid%3D${id}`
         image.onload = function() {
             context.drawImage(image, 20, 20, 160, 160, 440, 220, 140, 140);

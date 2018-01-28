@@ -73,7 +73,7 @@ function drawIco(b) {
 function drawQRcode(b, c) {
   return new Promise(function(d) {
     var e = new Image();
-    (e.crossOrigin = "anonymous"),
+    e.setAttribute("crossOrigin", "anonymous"),
       (e.src =
         "http://mobile.qq.com/qrcode?url=http%3A%2F%2Fshijianjidi.fanmingfei.com%2Fplant.html%3Fpid%3D" +
         c),
@@ -113,5 +113,4 @@ function getText(b) {
       (d[e] += b[f]);
   return d;
 }
-
-module.exports = draw
+module.exports = draw;
