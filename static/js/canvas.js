@@ -107,7 +107,7 @@
                 b.fillText(h[l], 40, 130 + l * 40);
             }),
             (b.font = "14px STXingKai"),
-            b.fillText("\u626B\u7801\u4E86\u89E3\u66F4\u591A", 460, 360);
+            b.fillText("\u626B\u7801\u4E86\u89E3\u66F4\u591A", 468, 360);
     }
 
     function getText(b) {
