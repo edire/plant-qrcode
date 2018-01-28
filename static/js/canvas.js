@@ -59,7 +59,8 @@
     function drawIco(b) {
         return new Promise(function(c) {
             var d = new Image();
-            (d.src = "1.png"),
+            d.crossOrigin = 'anonymous';
+            (d.src = "http://7xnsf1.com1.z0.glb.clouddn.com/static/images/center.png"),
             (b.font = "14px STXingKai"),
             b.fillText(
                     "\u4E34\u6C82\u4E2D\u5C0F\u5B66\u751F\u7EFC\u5408\u5B9E\u8DF5\u57FA\u5730",
