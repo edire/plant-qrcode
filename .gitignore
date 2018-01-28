@@ -1,2 +1,5 @@
 Runtime/
+node_modules
+card/images
+card/images.zip
 .DS_Store
