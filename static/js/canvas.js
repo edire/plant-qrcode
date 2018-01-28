@@ -77,8 +77,9 @@
             var e = new Image();
             e.setAttribute("crossOrigin", "anonymous"),
                 (e.src =
-                    "http://mobile.qq.com/qrcode?url=http%3A%2F%2Fshijianjidi.fanmingfei.com%2Fplant.html%3Fpid%3D" +
-                    c),
+                    '/qrcode.php?m=home&c=admin&a=getOne&url=' +
+                    encodeURIComponent("http://mobile.qq.com/qrcode?url=http%3A%2F%2Fshijianjidi.fanmingfei.com%2Fplant.html%3Fpid%3D" +
+                    c)),
                 (e.onload = function() {
                     b.drawImage(e, 20, 20, 160, 160, 440, 220, 140, 140), d();
                 });

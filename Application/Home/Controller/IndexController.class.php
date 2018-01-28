@@ -11,6 +11,11 @@ class IndexController extends Controller {
         }
         $this->ajaxReturn($result);
     }
+    public function getImg() {
+        $url = I('get.url');
+        header('content-type: image/png'); 
+        echo file_get_contents(urldecode($url));
+    }
     public function getOne ()
     {
         $id = I('get.id');

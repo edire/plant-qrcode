@@ -7,12 +7,7 @@ function draw({ name, anothername, family, florescence, fruiting, genus, submit,
     return new Promise(function(r) {
         context.clearRect(0, 0, 600, 400)
 
-        // context.fillStyle = "#EEEEFF";
-        // context.fillRect(0, 0, 1500, 1000);
-
         Promise.all([drawIco(context), drawQRcode(context, id)]).then(() => r(canvas))
-
-
 
         context.fillStyle = "red";
         context.textBaseline = 'middle';
@@ -74,7 +69,6 @@ function fillText(context, anothername, family, florescence) {
         var x = 40 //i ? 130 : 40
         context.fillText(arr2[i], x, 130 + i * lineHeigt)
     })
-
 
     context.font = '14px STXingKai';
     context.fillText('扫码了解更多', 460, 360)
