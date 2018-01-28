@@ -77,7 +77,7 @@
             var e = new Image();
             e.setAttribute("crossOrigin", "anonymous"),
                 (e.src =
-                    '/qrcode.php?m=home&c=admin&a=getOne&url=' +
+                    '/qrcode.php?m=home&c=admin&a=getImg&url=' +
                     encodeURIComponent("http://mobile.qq.com/qrcode?url=http%3A%2F%2Fshijianjidi.fanmingfei.com%2Fplant.html%3Fpid%3D" +
                     c)),
                 (e.onload = function() {
