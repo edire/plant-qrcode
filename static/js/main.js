@@ -174,7 +174,7 @@ $('.info-list').on('click', '.js-code-btn', function() {
                     genus: '',
                     id: d.id
                 }).then(x=>{
-                    $('.js-qrcode-img').attr('src', x.toDataUrl());
+                    $('.js-qrcode-img').attr('src', x.toDataURL());
                 })
             } else {
                 alert(data.msg);
