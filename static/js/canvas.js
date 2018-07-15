@@ -44,7 +44,9 @@
             h = _ref.submit,
             k = _ref.id;
         return new Promise(function(l) {
+            (context.fillStyle="white"),
             context.clearRect(0, 0, 600, 400),
+            context.fillRect(0,0,600,400),
                 Promise.all([drawIco(context), drawQRcode(context, k)]).then(function() {
                     return l(canvas);
                 }),
