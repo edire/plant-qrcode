@@ -8,4 +8,4 @@ if (root.indexOf('127.0.0.1') > -1) {
     app.root = root;
 }
 
-app.qiniu = 'http://plantarc.fanmingfei.com/';
+app.qiniu = 'http://plantarc.fanmingfei.com';
