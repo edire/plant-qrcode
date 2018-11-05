@@ -44,7 +44,9 @@
             h = _ref.submit,
             k = _ref.id;
         return new Promise(function(l) {
+            (context.fillStyle="white"),
             context.clearRect(0, 0, 600, 400),
+            context.fillRect(0,0,600,400),
                 Promise.all([drawIco(context), drawQRcode(context, k)]).then(function() {
                     return l(canvas);
                 }),
@@ -95,7 +97,7 @@
         var h = [];
         [
             [c, "\u522B  \u540D\uFF1A"],
-            [d, "\u5C5E  \u79D1\uFF1A"],
+            [d, "\u79D1  \u5C5E\uFF1A"],
             [e, "\u82B1\u679C\u671F\uFF1A"]
         ].forEach(function(_ref2) {
                 var _ref3 = _slicedToArray(_ref2, 2),
