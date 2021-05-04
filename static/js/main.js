@@ -154,7 +154,6 @@ $('.info-list').on('click', '.js-code-btn', function() {
     var dom = $(this).closest('.list-item');
     var name = dom.find('.js-name').text();
     var id = dom.attr('data-id');
-    var url = 'http://mobile.qq.com/qrcode?url=' + encodeURIComponent(app.root + '/plant.html?pid=' + id);
     $.ajax({
         url: app.root + '/qrcode.php?m=home&c=admin&a=getOne',
         type: 'get',
@@ -181,7 +180,6 @@ $('.info-list').on('click', '.js-code-btn', function() {
             }
         }
     });
-
     $('#qrCodeModal').modal();
 })
 $('.js-change-submit').on('click', function() {

@@ -77,17 +77,18 @@
     }
 
     function drawQRcode(b, c) {
-        return new Promise(function(d) {
-            var e = new Image();
-            e.setAttribute("crossOrigin", "anonymous"),
-                (e.src =
-                    '/qrcode.php?m=home&c=index&a=getImg&url=' +
-                    encodeURIComponent("http://mobile.qq.com/qrcode?url=http%3A%2F%2Fshijianjidi.fanmingfei.com%2Fplant.html%3Fpid%3D" +
-                    c)),
-                (e.onload = function() {
-                    b.drawImage(e, 20, 20, 160, 160, 440, 220, 140, 140), d();
-                });
+        const div = document.createElement('div')
+
+        var qrcode = new QRCode(div, {
+            text: 'http://shijianjidi.fanmingfei.com//plant.html?pid=' + c,
+            width: 500,
+            height: 500,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
         });
+        console.log(qrcode, qrcode._oDrawing._oContext.canvas)
+        b.drawImage(qrcode._oDrawing._oContext.canvas, 0, 0, 500, 500, 445, 225, 130, 130)
     }
 
     function fillText(b, c, d, e) {
